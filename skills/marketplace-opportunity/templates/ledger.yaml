@@ -1,0 +1,55 @@
+# Opportunity ledger skeleton. Schema: schemas/ledger.schema.json
+# Criterion ids: config/rubric.yaml. Gate ids: config/gates.yaml.
+run:
+  id: example-2026-11-06
+  created: 2026-11-06
+  brief_ref: brief.yaml
+  knowledge_pack_version: "2026-11-05"
+
+nodes:
+  - id: n-001
+    level: L1
+    parent: null
+    name: "<market name>"
+    lens: regulation
+    operator: descend.job
+    status: candidate
+    kill_reason: null
+    transaction_cards:
+      - buyer: "<who pays>"
+        seller: "<who supplies>"
+        object: "<what changes hands>"
+        job: "<why>"
+        trigger: "<what forces the purchase>"
+        frequency: "<how often>"
+        aov: {low: 0, high: 0, currency: GBP}
+        current_channels: []
+        current_intermediary: {who: "", take: ""}
+        frictions: []
+        information_asymmetry: ""
+        persistence: medium
+        liability: ""
+        regulation: []
+        ai_exposure: {substitution: low, agent_bypass: medium}
+        evidence: []
+    gates:
+      G1: {result: unknown, rationale: "", evidence: []}
+    scores:
+      supply_fragmentation: {central: 3, low: 1, high: 5, basis: assumed, evidence: []}
+    sizing: {}
+
+paths:
+  - id: p-001
+    name: "<wedge> -> <expansion>"
+    sequence: [n-001]
+    expansion_plausibility: {central: 3, low: 1, high: 5, basis: assumed, evidence: []}
+    status: candidate
+
+assumptions:
+  - id: a-001
+    statement: "<assumption>"
+    applies_to: p-001
+    impact: 4
+    uncertainty: 4
+    test: {design: "", metric: "", threshold: "set by founder", cost: "", timebox: ""}
+    status: open

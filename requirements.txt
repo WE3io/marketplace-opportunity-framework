@@ -1,0 +1,2 @@
+pyyaml>=6.0
+jsonschema>=4.0  # optional: full JSON Schema validation

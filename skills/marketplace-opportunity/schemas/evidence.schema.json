@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/WE3io/marketplace-opportunity-framework/schemas/evidence.schema.json",
+  "title": "Evidence log",
+  "description": "One entry per sourced claim. Scores and gates reference entries by id.",
+  "type": "object",
+  "required": ["evidence"],
+  "properties": {
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "claim", "source", "published", "confidence"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ev-[0-9]{3,}$"},
+          "claim": {"type": "string", "minLength": 5},
+          "value": {"description": "Optional numeric or textual value extracted from the source."},
+          "source": {
+            "type": "object",
+            "required": ["publisher", "url", "type"],
+            "properties": {
+              "publisher": {"type": "string"},
+              "title": {"type": "string"},
+              "url": {"type": "string"},
+              "type": {"enum": ["official", "filing", "regulator", "court", "independent", "analyst", "press", "vendor", "investor", "forum", "founder", "synthetic"]}
+            }
+          },
+          "published": {"type": "string", "description": "YYYY-MM-DD, YYYY-MM or YYYY"},
+          "period": {"type": "string", "description": "The period the claim describes, e.g. Q3 2026"},
+          "geography": {"type": "string"},
+          "confidence": {"enum": ["high", "moderate", "low"]},
+          "interest_flag": {"enum": ["none", "vendor", "investor", "operator"]},
+          "single_source": {"type": "boolean"},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

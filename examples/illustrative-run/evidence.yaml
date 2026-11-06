@@ -1,0 +1,75 @@
+# SYNTHETIC ILLUSTRATION. Every entry below is invented to demonstrate the format.
+# source.type is 'synthetic' and URLs use the reserved .invalid domain. Do not cite.
+evidence:
+  - id: ev-001
+    claim: Private landlords number in the hundreds of thousands and buy certificates independently
+    source: {publisher: Synthetic, title: Illustrative population figure, url: "https://example.invalid/ev-001", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-002
+    claim: Certified engineers are mostly sole traders and micro-firms
+    source: {publisher: Synthetic, title: Illustrative register count, url: "https://example.invalid/ev-002", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-003
+    claim: Safety inspections require on-site licensed work
+    source: {publisher: Synthetic, title: Illustrative regulation note, url: "https://example.invalid/ev-003", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-004
+    claim: One borough has a dense, countable population of HMO landlords
+    source: {publisher: Synthetic, title: Illustrative licensing register, url: "https://example.invalid/ev-004", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-005
+    claim: A booking intermediary does not itself need certification
+    source: {publisher: Synthetic, title: Illustrative legal note, url: "https://example.invalid/ev-005", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-006
+    claim: No platform dominates bundled compliance booking in the example geography
+    source: {publisher: Synthetic, title: Illustrative competitor scan, url: "https://example.invalid/ev-006", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-007
+    claim: Landlords value centralised compliance records and reminders
+    source: {publisher: Synthetic, title: Illustrative interview notes, url: "https://example.invalid/ev-007", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-008
+    claim: Once a tenant is placed, landlord and tenant deal directly
+    source: {publisher: Synthetic, title: Illustrative forum thread, url: "https://example.invalid/ev-008", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true
+  - id: ev-009
+    claim: Small landlords commission check-out reports from different clerks each time
+    source: {publisher: Synthetic, title: Illustrative survey, url: "https://example.invalid/ev-009", type: synthetic}
+    published: "2026"
+    geography: UK
+    confidence: low
+    interest_flag: none
+    single_source: true

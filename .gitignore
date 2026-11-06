@@ -1,0 +1,6 @@
+# Analyses are usually private: run outputs stay local unless deliberately added
+runs/
+__pycache__/
+*.pyc
+.DS_Store
+.venv/

@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/WE3io/marketplace-opportunity-framework/schemas/ledger.schema.json",
+  "title": "Opportunity ledger",
+  "description": "Shared state for a run: market-tree nodes, gates, scores, paths and assumptions. Criterion ids must match config/rubric.yaml; gate ids must match config/gates.yaml.",
+  "type": "object",
+  "required": ["run", "nodes"],
+  "$defs": {
+    "score": {
+      "type": "object",
+      "required": ["central", "low", "high", "basis"],
+      "properties": {
+        "central": {"type": "number", "minimum": 1, "maximum": 5},
+        "low": {"type": "number", "minimum": 1, "maximum": 5},
+        "high": {"type": "number", "minimum": 1, "maximum": 5},
+        "basis": {"enum": ["evidence", "assumed"]},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "note": {"type": "string"}
+      }
+    },
+    "gate": {
+      "type": "object",
+      "required": ["result", "rationale"],
+      "properties": {
+        "result": {"enum": ["pass", "fail", "unknown"]},
+        "rationale": {"type": "string"},
+        "evidence": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "transaction_card": {
+      "type": "object",
+      "required": ["buyer", "seller", "object", "trigger"],
+      "properties": {
+        "buyer": {"type": "string"},
+        "seller": {"type": "string"},
+        "object": {"type": "string"},
+        "job": {"type": "string"},
+        "trigger": {"type": "string"},
+        "frequency": {"type": "string"},
+        "aov": {"type": "object", "properties": {"low": {"type": "number"}, "high": {"type": "number"}, "currency": {"type": "string"}}},
+        "current_channels": {"type": "array", "items": {"type": "string"}},
+        "current_intermediary": {"type": "object", "properties": {"who": {"type": "string"}, "take": {"type": "string"}}},
+        "frictions": {"type": "array", "items": {"type": "string"}},
+        "information_asymmetry": {"type": "string"},
+        "persistence": {"enum": ["low", "medium", "high"]},
+        "liability": {"type": "string"},
+        "regulation": {"type": "array", "items": {"type": "string"}},
+        "ai_exposure": {"type": "object", "properties": {"substitution": {"enum": ["low", "medium", "high"]}, "agent_bypass": {"enum": ["low", "medium", "high"]}}},
+        "evidence": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "properties": {
+    "run": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {"type": "string"},
+        "created": {"type": "string"},
+        "brief_ref": {"type": "string"},
+        "knowledge_pack_version": {"type": "string"},
+        "notes": {"type": "string"}
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "level", "name", "status"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^n-[0-9]{3,}$"},
+          "level": {"enum": ["L0", "L1", "L2", "L3", "L4"]},
+          "parent": {"type": ["string", "null"]},
+          "name": {"type": "string"},
+          "lens": {"type": "string"},
+          "operator": {"type": "string"},
+          "status": {"enum": ["candidate", "shortlisted", "killed", "recommended"]},
+          "kill_reason": {"type": ["string", "null"]},
+          "alternative_model": {"type": ["string", "null"], "description": "Set when G1 recommends a non-marketplace form."},
+          "transaction_cards": {"type": "array", "items": {"$ref": "#/$defs/transaction_card"}},
+          "gates": {
+            "type": "object",
+            "propertyNames": {"pattern": "^G[1-7]$"},
+            "additionalProperties": {"$ref": "#/$defs/gate"}
+          },
+          "scores": {"type": "object", "additionalProperties": {"$ref": "#/$defs/score"}},
+          "sizing": {
+            "type": "object",
+            "properties": {
+              "gmv_low": {"type": "number"},
+              "gmv_high": {"type": "number"},
+              "currency": {"type": "string"},
+              "atomic_network": {"type": "string"},
+              "model_ref": {"type": "string"},
+              "confidence": {"enum": ["high", "moderate", "low"]}
+            }
+          }
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "sequence"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^p-[0-9]{3,}$"},
+          "name": {"type": "string"},
+          "sequence": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "Entry wedge first, then expansion steps."},
+          "expansion_plausibility": {"$ref": "#/$defs/score"},
+          "status": {"enum": ["candidate", "shortlisted", "killed", "recommended"]},
+          "strategy_ref": {"type": "string"}
+        }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "statement", "impact", "uncertainty"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^a-[0-9]{3,}$"},
+          "statement": {"type": "string"},
+          "applies_to": {"type": "string"},
+          "impact": {"type": "integer", "minimum": 1, "maximum": 5},
+          "uncertainty": {"type": "integer", "minimum": 1, "maximum": 5},
+          "test": {
+            "type": "object",
+            "properties": {
+              "design": {"type": "string"},
+              "metric": {"type": "string"},
+              "threshold": {"type": "string"},
+              "cost": {"type": "string"},
+              "timebox": {"type": "string"}
+            }
+          },
+          "status": {"enum": ["open", "testing", "validated", "invalidated"]}
+        }
+      }
+    }
+  }
+}

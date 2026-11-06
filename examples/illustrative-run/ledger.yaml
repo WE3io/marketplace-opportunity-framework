@@ -1,0 +1,251 @@
+# SYNTHETIC ILLUSTRATION. Scores, gates and evidence are invented to demonstrate the
+# format and the scripts. This is NOT an assessment of any real market.
+#   python skills/marketplace-opportunity/scripts/validate_ledger.py examples/illustrative-run/ledger.yaml
+#   python skills/marketplace-opportunity/scripts/score.py examples/illustrative-run/ledger.yaml
+run:
+  id: illustrative-run
+  created: 2026-11-06
+  brief_ref: brief.yaml
+  knowledge_pack_version: "2026-11-05"
+  notes: Synthetic example. Do not cite.
+
+nodes:
+  - id: n-001
+    level: L1
+    parent: null
+    name: Landlord compliance services
+    lens: regulation
+    operator: descend.compliance_trigger
+    status: candidate
+    transaction_cards:
+      - buyer: Private landlords
+        seller: Certified tradespeople and compliance firms
+        object: Mandated safety inspections and certificates
+        trigger: Statutory renewal cycles
+        frequency: Annual to five-yearly per property
+        persistence: medium
+        evidence: [ev-001]
+    gates:
+      G1: {result: pass, rationale: Independent landlords and independent certifiers, evidence: [ev-001]}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-002]}
+      demand_fragmentation: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-001]}
+      frequency_value: {central: 3, low: 2, high: 4, basis: assumed}
+      regulatory_direction: {central: 4, low: 3, high: 5, basis: assumed}
+      expansion_options: {central: 4, low: 3, high: 5, basis: assumed}
+      exit_routes: {central: 3, low: 1, high: 4, basis: assumed}
+
+  - id: n-002
+    level: L2
+    parent: n-001
+    name: Safety certification for private rentals
+    lens: regulation
+    operator: descend.job
+    status: candidate
+    transaction_cards:
+      - buyer: Private landlords
+        seller: Certified engineers and electricians
+        object: Gas and electrical safety certificates
+        trigger: Renewal deadlines
+        persistence: medium
+        evidence: [ev-001]
+    gates:
+      G1: {result: pass, rationale: Two independent sides, evidence: [ev-001]}
+      G7: {result: pass, rationale: Physical licensed work; AI augments scheduling only, evidence: [ev-003]}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-002]}
+      demand_fragmentation: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-001]}
+      frequency_value: {central: 3, low: 2, high: 4, basis: assumed}
+      matching_friction: {central: 3, low: 2, high: 4, basis: assumed}
+      trust_gap: {central: 4, low: 3, high: 5, basis: assumed}
+      ai_substitution: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-003]}
+      regulatory_direction: {central: 4, low: 3, high: 5, basis: assumed}
+      expansion_options: {central: 4, low: 3, high: 5, basis: assumed}
+
+  - id: n-003
+    level: L3
+    parent: n-002
+    name: Certification for HMO landlords in one city
+    lens: regulation
+    operator: descend.customer_type
+    status: shortlisted
+    transaction_cards:
+      - buyer: Landlords of houses in multiple occupation
+        seller: Certified engineers and electricians
+        object: Bundled safety certificates
+        trigger: Licence conditions and renewal deadlines
+        persistence: medium
+        evidence: [ev-004]
+    gates:
+      G1: {result: pass, rationale: Two independent sides, evidence: [ev-004]}
+      G2: {result: unknown, rationale: Landlords may rebook the same engineer directly, evidence: []}
+      G4: {result: pass, rationale: Platform books certified suppliers; does not certify, evidence: [ev-005]}
+      G5: {result: pass, rationale: No dominant platform found in the synthetic data, evidence: [ev-006]}
+      G7: {result: pass, rationale: Physical licensed work, evidence: [ev-003]}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-002]}
+      demand_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-004]}
+      frequency_value: {central: 4, low: 3, high: 4, basis: assumed}
+      matching_friction: {central: 3, low: 2, high: 4, basis: assumed}
+      trust_gap: {central: 4, low: 3, high: 5, basis: assumed}
+      payment_control: {central: 3, low: 2, high: 4, basis: assumed}
+      leakage: {central: 2, low: 1, high: 4, basis: assumed, note: Repeat bookings with the same engineer are likely}
+      atomic_network: {central: 4, low: 3, high: 5, basis: assumed}
+      ai_substitution: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-003]}
+      incumbent_proximity: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-006]}
+      expansion_options: {central: 4, low: 3, high: 5, basis: assumed}
+
+  - id: n-004
+    level: L4
+    parent: n-003
+    name: Bundled annual certification booking, one borough
+    lens: regulation
+    operator: transform.compliance_led
+    status: shortlisted
+    transaction_cards:
+      - buyer: HMO landlords in one borough
+        seller: Certified engineers and electricians
+        object: Annual compliance bundle with reminders and records
+        trigger: Licence renewal calendar
+        persistence: high
+        liability: Platform holds compliance records; suppliers liable for work
+        evidence: [ev-004]
+    gates:
+      G1: {result: pass, rationale: Two independent sides, evidence: [ev-004]}
+      G2: {result: pass, rationale: Records and reminders retain repeat bookings, evidence: [ev-007]}
+      G3: {result: pass, rationale: Small dense population in one borough, evidence: [ev-004]}
+      G4: {result: pass, rationale: Booking role only, evidence: [ev-005]}
+      G5: {result: pass, rationale: No dominant platform in synthetic data, evidence: [ev-006]}
+      G6: {result: unknown, rationale: Needs the unit-economics model, evidence: []}
+      G7: {result: pass, rationale: Physical licensed work, evidence: [ev-003]}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-002]}
+      demand_fragmentation: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-004]}
+      frequency_value: {central: 4, low: 3, high: 4, basis: assumed}
+      matching_friction: {central: 3, low: 2, high: 4, basis: assumed}
+      trust_gap: {central: 4, low: 3, high: 5, basis: assumed}
+      incumbent_headroom: {central: 3, low: 2, high: 4, basis: assumed}
+      payment_control: {central: 4, low: 3, high: 5, basis: assumed}
+      ancillary_monetisation: {central: 3, low: 2, high: 4, basis: assumed}
+      unit_economics: {central: 3, low: 1, high: 4, basis: assumed}
+      atomic_network: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-004]}
+      hard_side_acquisition: {central: 3, low: 2, high: 4, basis: assumed}
+      network_effects: {central: 2, low: 1, high: 3, basis: assumed}
+      multi_homing: {central: 3, low: 2, high: 4, basis: assumed}
+      leakage: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-007]}
+      ai_substitution: {central: 5, low: 4, high: 5, basis: evidence, evidence: [ev-003]}
+      agent_bypass: {central: 4, low: 3, high: 5, basis: assumed}
+      regulatory_direction: {central: 4, low: 3, high: 5, basis: assumed}
+      discovery_dependency: {central: 3, low: 2, high: 4, basis: assumed}
+      incumbent_proximity: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-006]}
+      why_now: {central: 3, low: 2, high: 4, basis: assumed}
+      founder_access: {central: 2, low: 1, high: 4, basis: assumed}
+      expansion_options: {central: 4, low: 3, high: 5, basis: assumed}
+      exit_routes: {central: 3, low: 1, high: 4, basis: assumed}
+
+  - id: n-005
+    level: L3
+    parent: n-001
+    name: Room-letting for HMO landlords
+    lens: demand
+    operator: descend.job
+    status: killed
+    kill_reason: "G2 fail (synthetic): repeat bilateral relationship once a tenant is placed; platform retains nothing"
+    transaction_cards:
+      - buyer: HMO landlords
+        seller: Tenants (two-sided letting)
+        object: Room lettings
+        trigger: Vacancies
+        persistence: high
+        evidence: [ev-008]
+    gates:
+      G1: {result: pass, rationale: Two sides, evidence: [ev-008]}
+      G2: {result: fail, rationale: High persistence and nothing retained after placement, evidence: [ev-008]}
+
+  - id: n-006
+    level: L2
+    parent: n-001
+    name: End-of-tenancy services for small landlords
+    lens: supply
+    operator: descend.job
+    status: candidate
+    transaction_cards:
+      - buyer: Small landlords
+        seller: Inventory clerks and cleaners
+        object: Check-out reports and cleans
+        trigger: Tenancy end
+        persistence: low
+        evidence: [ev-009]
+    gates:
+      G1: {result: pass, rationale: Two sides, evidence: [ev-009]}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: assumed}
+      demand_fragmentation: {central: 4, low: 3, high: 5, basis: assumed}
+      frequency_value: {central: 2, low: 1, high: 3, basis: assumed}
+      leakage: {central: 3, low: 2, high: 4, basis: assumed}
+      ai_substitution: {central: 3, low: 2, high: 4, basis: assumed, note: Report writing partly automatable}
+      expansion_options: {central: 3, low: 2, high: 4, basis: assumed}
+
+  - id: n-007
+    level: L4
+    parent: n-006
+    name: Check-out reports with deposit-dispute evidence packs
+    lens: ai_native
+    operator: transform.change_object
+    status: shortlisted
+    transaction_cards:
+      - buyer: Small landlords
+        seller: Inventory clerks
+        object: Check-out report plus dispute-ready evidence pack
+        trigger: Tenancy end and deposit claims
+        persistence: low
+        evidence: [ev-009]
+    gates:
+      G1: {result: pass, rationale: Two sides, evidence: [ev-009]}
+      G2: {result: pass, rationale: Different clerk each time is common (synthetic), evidence: [ev-009]}
+      G7: {result: unknown, rationale: Report drafting may be automated; site visit is not, evidence: []}
+    scores:
+      supply_fragmentation: {central: 4, low: 3, high: 5, basis: assumed}
+      demand_fragmentation: {central: 4, low: 3, high: 5, basis: assumed}
+      frequency_value: {central: 2, low: 1, high: 3, basis: assumed}
+      trust_gap: {central: 4, low: 3, high: 5, basis: assumed}
+      leakage: {central: 4, low: 3, high: 5, basis: evidence, evidence: [ev-009]}
+      atomic_network: {central: 4, low: 3, high: 5, basis: assumed}
+      ai_substitution: {central: 3, low: 1, high: 4, basis: assumed}
+      agent_bypass: {central: 3, low: 2, high: 4, basis: assumed}
+      expansion_options: {central: 3, low: 2, high: 4, basis: assumed}
+
+paths:
+  - id: p-001
+    name: Borough compliance bundle -> city HMO certification -> national rental safety certification
+    sequence: [n-004, n-003, n-002]
+    expansion_plausibility: {central: 3, low: 2, high: 4, basis: assumed}
+    status: shortlisted
+  - id: p-002
+    name: Dispute-ready check-out reports -> end-of-tenancy services
+    sequence: [n-007, n-006]
+    expansion_plausibility: {central: 3, low: 2, high: 4, basis: assumed}
+    status: shortlisted
+
+assumptions:
+  - id: a-001
+    statement: Records and reminders keep repeat bookings on-platform (leakage below 30%)
+    applies_to: p-001
+    impact: 5
+    uncertainty: 4
+    test: {design: Concierge pilot with 20 landlords over one renewal cycle, metric: Share of repeat bookings via platform, threshold: set by founder, cost: low, timebox: 12 weeks}
+    status: open
+  - id: a-002
+    statement: Certified suppliers will join for booking volume at the proposed take rate
+    applies_to: p-001
+    impact: 5
+    uncertainty: 3
+    test: {design: Supplier commitment test with 30 engineers, metric: Share committing to a pilot slot, threshold: set by founder, cost: low, timebox: 4 weeks}
+    status: open
+  - id: a-003
+    statement: AI will not commoditise the dispute evidence pack within 24 months
+    applies_to: p-002
+    impact: 4
+    uncertainty: 4
+    test: {design: Prototype the pack with AI tooling and compare to clerk output, metric: Landlord preference, threshold: set by founder, cost: low, timebox: 3 weeks}
+    status: open

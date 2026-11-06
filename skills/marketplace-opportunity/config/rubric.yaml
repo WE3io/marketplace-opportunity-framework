@@ -1,0 +1,235 @@
+# Scoring rubric: the canonical source for criteria, families and anchors.
+# Every criterion is scored 1-5 where 5 is ALWAYS favourable to the opportunity.
+# "Inverse" risks (leakage, multi-homing, AI substitution...) are therefore phrased
+# so that 5 = low risk. Score the anchors, interpolate 2 and 4.
+# Each score needs: central, low, high, basis (evidence|assumed), evidence [ids].
+
+version: 1.0.0
+
+families:
+  structure:
+    name: Market structure
+    question: Is there a fragmented, frequent, high-friction transaction a platform can improve?
+  economics:
+    name: Economics
+    question: Can the platform capture enough value per transaction to be a business?
+  liquidity:
+    name: Liquidity and defensibility
+    question: Can liquidity be reached cheaply, and will it hold?
+  exposure:
+    name: 2026 exposure
+    question: How exposed is the opportunity to AI substitution, agent bypass, regulation and platform dependency?
+  timing:
+    name: Timing and right to win
+    question: Why now, and why this founder?
+  strategic:
+    name: Strategic value
+    question: Where does this lead, and who would buy it?
+
+criteria:
+  supply_fragmentation:
+    family: structure
+    name: Supply fragmentation
+    anchors:
+      1: A handful of suppliers control most supply
+      3: Mid-sized operators plus a long tail
+      5: Thousands of small independent suppliers with no effective aggregator
+    evidence_hint: Registry counts, Companies House SIC codes, trade directories, licensing registers
+
+  demand_fragmentation:
+    family: structure
+    name: Demand fragmentation
+    anchors:
+      1: A few large buyers who procure directly
+      3: Many buyers, but purchasing concentrated through gatekeepers or procurement
+      5: Many independent buyers each making their own purchase decisions
+    evidence_hint: Population counts, household or business counts, community sizes
+
+  frequency_value:
+    family: structure
+    name: Frequency x value
+    anchors:
+      1: Rare and low value
+      3: Either frequent or high value, not both
+      5: Frequent and meaningful value, or rare but very high value with a large trust gap
+    evidence_hint: Mandated renewal cycles, usage surveys, incumbent order data, pricing pages
+
+  matching_friction:
+    family: structure
+    name: Matching friction today
+    anchors:
+      1: Buyers find suitable suppliers easily; prices are transparent
+      3: Search takes effort; some price opacity
+      5: Heterogeneous supply, scarce information, long lead times or wide price dispersion
+    evidence_hint: Complaint mining, forum threads, price dispersion checks, lead times
+
+  trust_gap:
+    family: structure
+    name: Trust gap the platform can close
+    anchors:
+      1: Quality is obvious before purchase
+      3: Some risk, managed informally (referrals, word of mouth)
+      5: Quality unverifiable before purchase and costly to get wrong; verification or guarantees would change behaviour
+    evidence_hint: Fraud or cowboy-trader reports, consumer-group findings, review patterns
+
+  incumbent_headroom:
+    family: economics
+    name: Headroom against the incumbent intermediary
+    anchors:
+      1: Incumbent intermediaries take little and serve well
+      3: Moderate take, some friction
+      5: Large fees for poor service, or opaque pricing the platform can undercut
+    evidence_hint: Broker or agency fee schedules, filed accounts, review sites
+
+  payment_control:
+    family: economics
+    name: Payment-flow control
+    anchors:
+      1: Payment happens off-platform by custom (cash, invoice on completion)
+      3: Can be brought on-platform with incentives
+      5: Naturally on-platform (escrow, deposits, instalments, insurance, subscriptions)
+    evidence_hint: How incumbents take payment; buyer expectations
+
+  ancillary_monetisation:
+    family: economics
+    name: Ancillary monetisation potential
+    anchors:
+      1: No credible revenue beyond the take rate
+      3: Some ancillary lines (software, payments) once established
+      5: Strong ancillary lines reachable at modest scale (fulfilment, financing, insurance, compliance tooling). Ads count only if scale is plausible.
+    evidence_hint: Comparable platforms' revenue mix; WARC-type retail media concentration data
+
+  unit_economics:
+    family: economics
+    name: Unit economics plausibility
+    anchors:
+      1: Contribution negative at any plausible take rate
+      3: Positive contribution only at optimistic take rate or repeat rate
+      5: Positive contribution at a conservative take rate with plausible acquisition costs
+    evidence_hint: Output of the sizing/unit-economics model (templates/sizing_model.py)
+
+  atomic_network:
+    family: liquidity
+    name: Atomic network size and time to liquidity
+    anchors:
+      1: Needs national or global scale before it is useful
+      3: City-level, thousands of participants
+      5: Useful with tens to low hundreds of participants in one community or area
+    evidence_hint: Density of supply and demand in the entry geography or community
+
+  hard_side_acquisition:
+    family: liquidity
+    name: Hard-side acquisition
+    anchors:
+      1: Hard side is unreachable, uninterested or very expensive to recruit
+      3: Reachable with paid acquisition or significant sales effort
+      5: Reachable cheaply through a concentrated channel (association, register, community) with a clear reason to join
+    evidence_hint: Channels to suppliers, their current customer-acquisition pain, founder access
+
+  network_effects:
+    family: liquidity
+    name: Network effects
+    anchors:
+      1: None beyond the transaction itself
+      3: Local cross-side effects
+      5: Strong cross-side effects plus data or reputation effects that compound
+    evidence_hint: Whether more supply measurably improves buyer outcomes and vice versa
+
+  multi_homing:
+    family: liquidity
+    name: Multi-homing (5 = low)
+    anchors:
+      1: Both sides use several platforms at once at no cost
+      3: One side multi-homes
+      5: Switching or multi-homing is costly for both sides (workflow, reputation, inventory lock-in)
+    evidence_hint: Supplier behaviour on existing platforms
+
+  leakage:
+    family: liquidity
+    name: Leakage (5 = low)
+    anchors:
+      1: Repeat bilateral relationship; platform adds nothing after the introduction
+      3: Some repeat, but the platform retains value (payments, scheduling, records)
+      5: Each transaction is with a new counterparty, or the platform owns fulfilment or the guarantee
+    evidence_hint: Relationship persistence on the transaction card; behaviour on incumbent platforms
+
+  ai_substitution:
+    family: exposure
+    name: AI substitution (5 = low)
+    anchors:
+      1: The core service is already largely automatable
+      3: Partly automatable; humans remain in the loop
+      5: Physical, licensed or liability-bearing work that AI augments rather than replaces
+    evidence_hint: Freelance-market evidence (Fiverr, Upwork trends), task analysis
+
+  agent_bypass:
+    family: exposure
+    name: Agent-bypass exposure (5 = low)
+    anchors:
+      1: Pure listing and search on commodity goods
+      3: Mixed
+      5: The platform owns fulfilment, payment or guarantees an agent must route through
+    evidence_hint: Whether buyers' AI agents could complete the match without the platform
+
+  regulatory_direction:
+    family: exposure
+    name: Regulatory load and direction
+    anchors:
+      1: Tightening against the model, or compliance cost disproportionate to take
+      3: Neutral or manageable
+      5: New duties create demand for the platform, or raise barriers the venture can meet
+    evidence_hint: legislation.gov.uk, gov.uk consultations, CMA, EU DSA/GPSR, worker-status rules
+
+  discovery_dependency:
+    family: exposure
+    name: Discovery dependency (5 = low)
+    anchors:
+      1: Depends on one gatekeeper (Google search, an app store, an AI assistant) for most demand
+      3: Mixed channels
+      5: Owned or community channels; repeat demand without paid discovery
+    evidence_hint: How incumbents acquire customers; organic vs paid traffic patterns
+
+  incumbent_proximity:
+    family: exposure
+    name: Big-incumbent proximity (5 = far)
+    anchors:
+      1: A dominant platform already serves the exact niche or can trivially add it
+      3: Adjacent incumbents could enter with effort
+      5: No large platform has the supply, workflow or licence to compete
+    evidence_hint: Feature lists and category pages of horizontals and verticals
+
+  why_now:
+    family: timing
+    name: Why now
+    anchors:
+      1: Nothing has changed; earlier attempts failed for reasons that still hold
+      3: A plausible enabling change, weakly evidenced
+      5: A clear, evidenced change in technology, regulation, behaviour or cost that earlier attempts lacked
+    evidence_hint: Dated regulatory changes, cost curves, adoption data
+
+  founder_access:
+    family: timing
+    name: Founder access and insight
+    anchors:
+      1: No access to either side and no domain insight
+      3: Indirect access (network, advisers)
+      5: Direct relationships with the hard side or a privileged distribution channel
+    evidence_hint: Brief (founder assets); confirm with the founder
+
+  expansion_options:
+    family: strategic
+    name: Expansion options from this node
+    anchors:
+      1: Dead end; no adjacent niches or stack extensions
+      3: Some adjacent niches or geographies
+      5: Clear ladder to larger markets and up the stack (payments, fulfilment, financing)
+    evidence_hint: The market tree; adjacent transaction cards
+
+  exit_routes:
+    family: strategic
+    name: Exit routes
+    anchors:
+      1: No plausible acquirers; IPO-only story
+      3: A few possible acquirers
+      5: Several active strategic acquirers in the category (recent comparable deals)
+    evidence_hint: Recent M&A in the category (filings, press)

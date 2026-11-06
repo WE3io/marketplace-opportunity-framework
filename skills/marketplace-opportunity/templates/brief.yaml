@@ -1,0 +1,23 @@
+# Stage 0 brief. Fill from the user's idea, then confirm with the user.
+run_id: example-2026-11-06
+idea: >
+  One-paragraph statement of the venture idea, in the user's words where possible.
+hypothesis: >
+  The marketplace hypothesis: who would transact with whom, and why a platform helps.
+entry_point: problem_first   # problem_first | supply_first | demand_first | technology_first | regulation_first | founder_asset_first | unbundling_first
+geography: [UK]               # entry geography; add EU/US if in scope
+founder_assets:
+  - Direct relationships, domain expertise, distribution, data or capital the founder brings
+capital: "e.g. bootstrapped to £250k, or seed £1-2m"
+horizon_months: 24
+risk_appetite: moderate       # low | moderate | high
+weight_profile: balanced      # balanced | venture | bootstrapped | strategic (all are reported; this is the headline)
+min_terminal_market: "Smallest terminal market worth pursuing, e.g. £50m annual GMV"
+max_time_to_liquidity_months: 9
+exclusions:
+  - Categories, models or geographies the founder rules out
+success_criteria:
+  - What a useful output looks like for this founder
+constraints:
+  data_budget: none           # none | modest | substantial (paid data tools)
+  human_checkpoints: true

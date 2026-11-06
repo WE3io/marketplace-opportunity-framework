@@ -1,0 +1,38 @@
+# Weight profiles. Family weights are normalised at runtime, so they need not sum to 1.
+# criterion_multipliers (optional) re-weight criteria within their family (default 1.0).
+# Run every shortlist under several profiles: if the ranking flips, the choice is a
+# values decision for the founder, not an analytical finding.
+# These are a starting configuration, not tested values. Tune with docs/testing-the-framework.md.
+
+version: 1.0.0
+default_profile: balanced
+
+profiles:
+  balanced:
+    description: Default. Balanced view of structure, economics and liquidity.
+    families: {structure: 0.25, economics: 0.20, liquidity: 0.20, exposure: 0.15, timing: 0.10, strategic: 0.10}
+
+  venture:
+    description: Venture-scale ambition. Favours network effects, terminal value and exits.
+    families: {structure: 0.20, economics: 0.15, liquidity: 0.25, exposure: 0.15, timing: 0.10, strategic: 0.15}
+    criterion_multipliers: {network_effects: 1.5, expansion_options: 1.5}
+
+  bootstrapped:
+    description: Capital-light. Favours fast liquidity, unit economics and founder access.
+    families: {structure: 0.20, economics: 0.25, liquidity: 0.20, exposure: 0.15, timing: 0.15, strategic: 0.05}
+    criterion_multipliers: {atomic_network: 1.5, hard_side_acquisition: 1.5, unit_economics: 1.5, founder_access: 1.5}
+
+  strategic:
+    description: Corporate or strategic builder. Favours adjacency to existing assets (score founder_access as access via existing assets).
+    families: {structure: 0.20, economics: 0.20, liquidity: 0.15, exposure: 0.15, timing: 0.15, strategic: 0.15}
+    criterion_multipliers: {founder_access: 1.5, incumbent_proximity: 1.25}
+
+# Missing criteria are treated as maximally uncertain.
+missing_score: {central: 3, low: 1, high: 5}
+
+# Path scoring: entry wedge (first node), terminal market (highest-level node in the
+# sequence) and the plausibility of the expansion between them.
+path:
+  weights: {wedge: 0.5, terminal: 0.3, expansion: 0.2}
+  # Weakest-link cap: a path cannot score more than its weakest component + cap_margin.
+  cap_margin: 1.0

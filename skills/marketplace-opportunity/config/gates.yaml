@@ -1,0 +1,56 @@
+# Kill gates. Run BEFORE scoring. Each returns pass | fail | unknown.
+# fail    -> node killed (or redesigned) with the reason logged in the ledger.
+# unknown -> NOT a pass. Add a priority assumption to the register.
+# G2 and G7 are where 2026 differs most from the 2015 playbook: give them the most evidence.
+
+version: 1.0.0
+
+gates:
+  G1:
+    name: Marketplace fit
+    question: Are there independent buyers and sellers, and does a platform add real matching value?
+    fails_when: No independent second side, or the platform adds little to matching.
+    redesign: [saas, first_party_retail, lead_generation, managed_service, community]
+    evidence_needed: Transaction card showing two independent sides and current matching friction.
+
+  G2:
+    name: Leakage
+    question: After the first match, will the parties keep transacting through the platform?
+    fails_when: High repeat with the same counterparty AND the platform cannot own payment, the work, a guarantee or ongoing tooling.
+    redesign: [managed_model, embedded_workflow_tools, saas_not_marketplace]
+    evidence_needed: Relationship persistence; how incumbents retain (or fail to retain) repeat transactions.
+
+  G3:
+    name: Atomic network feasibility
+    question: Can the smallest self-sustaining network be reached within the brief's capital and time?
+    fails_when: The smallest useful network needs more participants, money or time than the brief allows.
+    redesign: [narrow_niche, concentrate_in_time_and_space]
+    evidence_needed: Density counts for the entry niche; hard-side acquisition channel.
+
+  G4:
+    name: Regulation and liability
+    question: Is the activity lawful for this venture, and is the liability insurable and proportionate?
+    fails_when: Activity prohibited; licence unobtainable; liability uninsurable or out of proportion to the take.
+    redesign: [change_object, change_role_to_referral]
+    evidence_needed: Primary legal sources (legislation, regulator guidance) for the target geography.
+
+  G5:
+    name: Entrenched incumbent
+    question: Does one platform already dominate this exact niche with strong network effects?
+    fails_when: A dominant platform holds the niche and the candidate has no differentiating wedge. Example - Vinted at 50-60% of UK consumer-to-consumer fashion GMV in 2025 (CMA, as relayed).
+    redesign: [sub_niche_incumbent_serves_badly, abandon]
+    evidence_needed: Share estimates, category coverage of incumbents, gaps in their service.
+
+  G6:
+    name: Economics
+    question: Is there a take rate both sides accept that covers variable costs at target scale?
+    fails_when: No take rate covers payments, support, trust and safety, and compliance at target scale while staying acceptable to both sides.
+    redesign: [change_monetisation_stack, abandon]
+    evidence_needed: Unit-economics model with sensitivity on take rate, repeat and leakage.
+
+  G7:
+    name: AI substitution
+    question: Will AI perform the traded service directly within the venture's horizon?
+    fails_when: The traded service is likely to be automated end-to-end within the horizon (commoditised writing, translation, simple design or code).
+    redesign: [sell_outcome_or_liability, abandon]
+    evidence_needed: Task analysis; freelance-market trends (e.g. Fiverr active buyers -26% YoY to Q3 2026).

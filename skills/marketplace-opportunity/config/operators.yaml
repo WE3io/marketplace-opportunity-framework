@@ -1,0 +1,76 @@
+# Market-tree generation: levels, entry points, lenses, operators, controls and signals.
+# Generate under several lenses, then cluster and deduplicate. Every node needs a
+# transaction card and at least one evidence item that the transaction happens today.
+
+version: 1.0.0
+
+levels:
+  L0: {name: Sector, emphasis: context only}
+  L1: {name: Market, emphasis: terminal value, structure, incumbents}
+  L2: {name: Segment, emphasis: structure, economics, regulation}
+  L3: {name: Niche, emphasis: wedge quality, atomic-network feasibility}
+  L4: {name: Micro-niche, emphasis: time to liquidity, hard-side access, founder fit}
+
+entry_points:
+  problem_first: {cue: "A pain point. Start from who suffers it and how they transact today.", favour: [descend.job, descend.urgency, transform.change_object]}
+  supply_first: {cue: "Idle capacity or an under-monetised asset. Who would pay to use it?", favour: [transform.flip_sides, descend.asset_type, descend.geography]}
+  demand_first: {cue: "An aggregatable buyer group. What do they buy repeatedly from fragmented suppliers?", favour: [descend.customer_type, descend.community, transform.reverse_marketplace]}
+  technology_first: {cue: "A new capability (often AI). Which coordination costs does it collapse?", favour: [transform.ai_revive_graveyard, transform.change_matching_mode, transform.agent_side]}
+  regulation_first: {cue: "A new or tightening mandate creates recurring, urgent demand.", favour: [descend.compliance_trigger, transform.compliance_led, descend.geography]}
+  founder_asset_first: {cue: "Privileged access to one side. Which transactions does that side need help with?", favour: [descend.customer_type, transform.tool_to_network]}
+  unbundling_first: {cue: "A horizontal platform serves a category badly on trust or workflow.", favour: [transform.unbundle_horizontal, descend.community]}
+
+lenses:
+  supply: Look from the supplier's side - idle capacity, acquisition pain, payment delays.
+  regulation: Look for mandates, licences, inspections, reporting duties and deadlines.
+  ai_native: Look for coordination costs AI collapses, and for services AI will replace.
+  unbundling: Look for categories horizontals (eBay, Gumtree, Facebook Marketplace, Upwork) serve badly.
+  founder_asset: Look for what the founder's access makes uniquely reachable.
+  demand: Look for buyer groups with repeated, painful purchasing.
+
+operators:
+  descend:
+    customer_type: Segment by consumer, small firm, enterprise or public body.
+    job: Segment by job to be done or use case.
+    urgency: Segment by emergency, scheduled or discretionary demand.
+    geography: Segment by geography and density (borough, city, region).
+    compliance_trigger: Segment by the legal or contractual trigger that forces the purchase.
+    community: Segment by community or identity with its own vocabulary.
+    price_tier: Segment by budget, mid-market or premium.
+    asset_type: Segment by the type of asset being traded or serviced.
+    transaction_type: Segment by one-off, recurring or project transactions.
+  transform:
+    flip_sides: Swap who searches and who is found (reverse marketplace, demand-led tendering).
+    reverse_marketplace: Buyers post needs; suppliers bid.
+    change_object: Move from goods to service to outcome or guarantee.
+    change_matching_mode: Move along search -> curated -> algorithmic dispatch -> fully managed.
+    unbundle_horizontal: Carve a category out of a horizontal platform with specialist trust and workflow.
+    tool_to_network: Build software for one side first; add the network once usage exists.
+    b2c_b2b_swap: Move a proven pattern between consumer and business contexts.
+    import_pattern: Import a pattern from another country (check regulation and density first).
+    ai_revive_graveyard: Revisit managed categories that failed on coordination cost (investor hypothesis; no outcome data yet).
+    agent_side: Make AI agents the buyers or sellers.
+    compliance_led: Sell verified compliance as part of the transaction.
+  ascend:
+    adjacent_geography: Same transaction, next geography.
+    adjacent_category: Same buyers, adjacent category.
+    adjacent_side: Serve a third side (e.g. financiers, insurers).
+    up_the_stack: Add payments, fulfilment, financing, insurance or advertising.
+
+controls:
+  max_l3_l4_candidates: 60
+  min_l3_l4_candidates: 30
+  min_lenses: 3
+  require_transaction_card: true
+  require_evidence_of_current_transaction: true
+  reject_templated_names: true   # "Uber for X" must name buyers, suppliers and trigger
+
+micro_niche_signals:
+  - Trading in informal channels (WhatsApp or Facebook groups, forum wanted-threads, shared spreadsheets). Strong demand signal; also a leakage warning.
+  - Recurring complaints in reviews of incumbent intermediaries.
+  - Wide price dispersion for the same service.
+  - Long lead times or booking queues.
+  - Gatekeeping brokers taking large fees.
+  - New or tightening mandates with deadlines.
+  - Enthusiast communities with their own vocabulary and authentication problems.
+  - Countable registered populations (licensing registers, professional bodies, SIC codes).
